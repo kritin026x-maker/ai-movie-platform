@@ -8,103 +8,176 @@
   <style>
     body {
       margin: 0;
-      background-color: #141414;
       font-family: Arial, sans-serif;
+      background: #111;
       color: white;
+      overflow-x: hidden;
     }
 
+    /* NAVBAR */
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      background-color: #000;
+      padding: 15px 40px;
+      background: black;
     }
 
     .logo {
       color: red;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
     }
 
+    .nav-links a {
+      color: white;
+      margin-left: 20px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* HERO */
     .hero {
       padding: 100px 40px;
-      background: linear-gradient(to right, black 40%, transparent),
-      url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover;
+      background: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba') center/cover no-repeat;
     }
 
     .hero h1 {
       font-size: 48px;
-      margin-bottom: 20px;
     }
 
-    .btn {
+    .hero button {
       padding: 12px 25px;
       background: red;
-      border: none;
       color: white;
-      font-size: 16px;
-      cursor: pointer;
+      border: none;
       border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
     }
 
-    .movies {
+    /* SECTION */
+    .section {
       padding: 40px;
     }
 
     .movie-row {
       display: flex;
-      gap: 15px;
+      gap: 20px;
       overflow-x: auto;
     }
 
     .movie-card {
       min-width: 200px;
       height: 300px;
-      background-color: #222;
       border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
       transition: transform 0.3s;
     }
 
     .movie-card:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
 
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 28px;
-      }
-
-      .navbar {
-        padding: 15px 20px;
-      }
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
     }
+
+    .modal-content {
+      background: #181818;
+      margin: 8% auto;
+      padding: 30px;
+      width: 60%;
+      border-radius: 8px;
+    }
+
+    .close {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 
 <body>
 
+  <!-- NAVBAR -->
   <div class="navbar">
     <div class="logo">AI MOVIES</div>
-    <div>Home | Movies | My List</div>
-  </div>
-
-  <div class="hero">
-    <h1>Welcome to My AI Movie Platform</h1>
-    <p>Stream AI Generated Trailers & Movies</p>
-    <button class="btn">Watch Now</button>
-  </div>
-
-  <div class="movies">
-    <h2>Trending Now</h2>
-    <div class="movie-row">
-  <div class="movie-card" style="background:url('https://images.unsplash.com/photo-1502136969935-8d8eef54d77c') center/cover;"></div>
-  <div class="movie-card" style="background:url('https://images.unsplash.com/photo-1517602302552-471fe67acf66') center/cover;"></div>
-  <div class="movie-card" style="background:url('https://images.unsplash.com/photo-1497032205916-ac775f0649ae') center/cover;"></div>
-  <div class="movie-card" style="background:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba') center/cover;"></div>
-  <div class="movie-card" style="background:url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover;"></div>
+    <div class="nav-links">
+      <a onclick="alert('Home')">Home</a>
+      <a onclick="alert('Movies')">Movies</a>
+      <a onclick="alert('Web Series')">Web Series</a>
+      <a onclick="alert('My List')">My List</a>
     </div>
   </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Welcome to My AI Movie Platform</h1>
+    <p>Stream AI Generated Movies & Web Series</p>
+    <button onclick="alert('Playing Trailer...')">Watch Now</button>
+  </div>
+
+  <!-- TRENDING -->
+  <div class="section">
+    <h2>Trending Now</h2>
+    <div class="movie-row">
+
+      <div class="movie-card"
+        onclick="openModal('AI Action','An AI generated action movie.')"
+        style="background-image:url('https://images.unsplash.com/photo-1502136969935-8d8eef54d77c');">
+      </div>
+
+      <div class="movie-card"
+        onclick="openModal('AI Drama','Emotional AI drama story.')"
+        style="background-image:url('https://images.unsplash.com/photo-1517602302552-471fe67acf66');">
+      </div>
+
+      <div class="movie-card"
+        onclick="openModal('AI Thriller','Suspense thriller created by AI.')"
+        style="background-image:url('https://images.unsplash.com/photo-1497032205916-ac775f0649ae');">
+      </div>
+
+      <div class="movie-card"
+        onclick="openModal('AI Sci-Fi','Future sci-fi AI story.')"
+        style="background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba');">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div id="movieModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <h2 id="movieTitle"></h2>
+      <p id="movieDesc"></p>
+      <button onclick="alert('Play Movie')">Play</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(title, desc) {
+      document.getElementById("movieTitle").innerText = title;
+      document.getElementById("movieDesc").innerText = desc;
+      document.getElementById("movieModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("movieModal").style.display = "none";
+    }
+  </script>
 
 </body>
 </html>
