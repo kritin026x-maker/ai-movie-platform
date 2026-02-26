@@ -64,11 +64,10 @@
     .movie-row {
       display: flex;
       gap: 20px;
-      overflow-x: auto;
     }
 
     .movie-card {
-      min-width: 200px;
+      width: 200px;
       height: 300px;
       border-radius: 8px;
       background-size: cover;
@@ -90,18 +89,49 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.9);
+      z-index: 1000;
     }
 
     .modal-content {
       background: #181818;
-      margin: 8% auto;
-      padding: 30px;
-      width: 60%;
-      border-radius: 8px;
+      width: 70%;
+      margin: 5% auto;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .modal-hero {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .play-btn {
+      background: white;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      margin-right: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .add-btn {
+      background: gray;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
     }
 
     .close {
-      float: right;
+      position: absolute;
+      right: 20px;
+      top: 15px;
       font-size: 28px;
       cursor: pointer;
     }
@@ -116,8 +146,8 @@
     <div class="logo">AI MOVIES</div>
     <div class="nav-links">
       <a onclick="alert('Home')">Home</a>
-      <a onclick="alert('Movies')">Movies</a>
-      <a onclick="alert('Web Series')">Web Series</a>
+      <a onclick="alert('Movies Category')">Movies</a>
+      <a onclick="alert('Web Series Category')">Web Series</a>
       <a onclick="alert('My List')">My List</a>
     </div>
   </div>
@@ -135,23 +165,30 @@
     <div class="movie-row">
 
       <div class="movie-card"
-        onclick="openModal('AI Action','An AI generated action movie.')"
+        onclick="openModal(
+        'AI Action Movie',
+        'An intense AI generated action story.',
+        'https://images.unsplash.com/photo-1502136969935-8d8eef54d77c'
+        )"
         style="background-image:url('https://images.unsplash.com/photo-1502136969935-8d8eef54d77c');">
       </div>
 
       <div class="movie-card"
-        onclick="openModal('AI Drama','Emotional AI drama story.')"
+        onclick="openModal(
+        'AI Drama Series',
+        'Emotional AI drama web series.',
+        'https://images.unsplash.com/photo-1517602302552-471fe67acf66'
+        )"
         style="background-image:url('https://images.unsplash.com/photo-1517602302552-471fe67acf66');">
       </div>
 
       <div class="movie-card"
-        onclick="openModal('AI Thriller','Suspense thriller created by AI.')"
+        onclick="openModal(
+        'AI Thriller',
+        'Suspense thriller created by AI.',
+        'https://images.unsplash.com/photo-1497032205916-ac775f0649ae'
+        )"
         style="background-image:url('https://images.unsplash.com/photo-1497032205916-ac775f0649ae');">
-      </div>
-
-      <div class="movie-card"
-        onclick="openModal('AI Sci-Fi','Future sci-fi AI story.')"
-        style="background-image:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba');">
       </div>
 
     </div>
@@ -161,16 +198,23 @@
   <div id="movieModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">×</span>
-      <h2 id="movieTitle"></h2>
-      <p id="movieDesc"></p>
-      <button onclick="alert('Play Movie')">Play</button>
+      <div id="modalHero" class="modal-hero"></div>
+
+      <div class="modal-body">
+        <h2 id="movieTitle"></h2>
+        <p id="movieDesc"></p>
+
+        <button class="play-btn">▶ Play</button>
+        <button class="add-btn">+ My List</button>
+      </div>
     </div>
   </div>
 
   <script>
-    function openModal(title, desc) {
+    function openModal(title, desc, image) {
       document.getElementById("movieTitle").innerText = title;
       document.getElementById("movieDesc").innerText = desc;
+      document.getElementById("modalHero").style.backgroundImage = "url('" + image + "')";
       document.getElementById("movieModal").style.display = "block";
     }
 
