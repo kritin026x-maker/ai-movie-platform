@@ -4,15 +4,107 @@
   <title>AI Movie Platform</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #141414;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #000;
+    }
+
+    .logo {
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .hero {
+      padding: 100px 40px;
+      background: linear-gradient(to right, black 40%, transparent),
+      url('https://images.unsplash.com/photo-1524985069026-dd778a71c7b4') center/cover;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      background: red;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .movies {
+      padding: 40px;
+    }
+
+    .movie-row {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+    }
+
+    .movie-card {
+      min-width: 200px;
+      height: 300px;
+      background-color: #222;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .navbar {
+        padding: 15px 20px;
+      }
+    }
+  </style>
 </head>
-<body style="background-color:#0f0f0f; color:white; font-family:Arial; text-align:center; padding:50px;">
 
-  <h1>🎬 Welcome to My AI Movie Platform</h1>
-  <p>This is my Netflix-style movie website.</p>
+<body>
 
-  <button style="padding:15px 30px; background:red; color:white; border:none; border-radius:8px; cursor:pointer;">
-    Watch Trailer
-  </button>
+  <div class="navbar">
+    <div class="logo">AI MOVIES</div>
+    <div>Home | Movies | My List</div>
+  </div>
+
+  <div class="hero">
+    <h1>Welcome to My AI Movie Platform</h1>
+    <p>Stream AI Generated Trailers & Movies</p>
+    <button class="btn">Watch Now</button>
+  </div>
+
+  <div class="movies">
+    <h2>Trending Now</h2>
+    <div class="movie-row">
+      <div class="movie-card"></div>
+      <div class="movie-card"></div>
+      <div class="movie-card"></div>
+      <div class="movie-card"></div>
+      <div class="movie-card"></div>
+    </div>
+  </div>
 
 </body>
 </html>
